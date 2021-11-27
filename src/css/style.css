@@ -24,7 +24,7 @@ form {
 }
 
 h1 {
-	color: rgba(255, 255, 255, 0.932);
+	color: rgb(255, 255, 255);
 	background: radial-gradient(circle, rgba(145, 160, 236, 0.829) 0%, rgba(241, 116, 141, 0.849) 100%);
 	text-transform: uppercase;
 	margin-top: 0;
