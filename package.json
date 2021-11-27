@@ -1,0 +1,28 @@
+{
+  "name": "formpages-io-master",
+  "version": "1.0.0",
+  "description": "a simple form sanitation ",
+  "main": "index.js",
+  "targets": {
+    "main": false
+  },
+  "source": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel --open",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlejandroBryan/formpages-io.git"
+  },
+  "author": "Alejandro Bryan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlejandroBryan/formpages-io/issues"
+  },
+  "homepage": "https://github.com/AlejandroBryan/formpages-io#readme",
+  "devDependencies": {
+    "parcel": "^2.0.1"
+  }
+}
