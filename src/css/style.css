@@ -1,3 +1,12 @@
+:root {
+
+--danger: rgba(235, 117, 117, 0.733);
+--success: rgba(169, 248, 153, 0.733);
+--dark: rgba(94, 89, 89, 0.733);
+
+
+}
+
 * {
 
 	box-sizing: border-box;
@@ -14,11 +23,13 @@ body {
 
 	max-width: 768px;
 	min-width: 320px;
+	
 
 }
 
 form {
 	border-top: 2px solid rgba(126, 124, 124, 0.76);
+	margin-bottom: 2em;
 
 
 }
@@ -76,7 +87,7 @@ legend {
 }
 
 .user-info:last-child {
-	border-bottom: 2px solid rgba(107, 103, 103, 0.856);
+	border-bottom: 2px solid var(--dark);
 }
 
 ::placeholder {
@@ -87,25 +98,71 @@ legend {
 	width: 50%;
 
 }
+  /*********** alerts styles************************/
+  /*********** alerts styles************************/
 
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea,
-select {
+  .bm-alert{
+    position: relative;
+    color: var(--dark);
+    padding: 5px 10px;
+    border-radius: 5px;
+    line-height: 1.5;
+    opacity: 1;
+    transition: opacity 0.6s;
+  
+}
+.bm-alert p{
+
+	margin: auto;
+	
+  }
+.bm-danger{
+	background-color: var(--danger);
+}
+
+
+.bm-control {
 	border-radius: 6px;
 	font-size: 16px;
 	height: auto;
 	margin: 0;
 	outline: 0;
+	z-index: 10;
 	padding: 15px;
 	width: 100%;
-	background-color: #ccffe6c9;
+	background-color: rgba(236, 239, 255, 0.89);
 	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.05);
 	margin-bottom: 30px;
-	border: white;
+	border: rgba(255, 255, 255, 0.952);
 }
+.user-info{
+	position: relative;
+  }
+
+
+.liveValidateMessage {
+	position: absolute !important;
+	top: -4px;
+	right: 0;
+	width: 80%;
+	opacity: 0;
+	transform: translateY(100%);
+	transition: all .5s ease-out;
+  }
+
+  .liveValidateMessage--visible {
+	opacity: 1;
+	transform: translateY(0)
+  }
+  
+
+  .bm-small{
+    padding: 2px 10px;
+    margin-bottom: 0;
+}
+
+
 
 /*********animation section***********/
 /*********animation section***********/
@@ -117,40 +174,12 @@ select {
 	transition: all 3s;
 }
 
-input[type="text"]:focus {
+.bm-control:focus {
 	background: white;
-	transform: scale(1.2);
+	transform: scale(1.0);
 	color: black;
 }
 
-input[type="tel"]:focus {
-	background: white;
-	transform: scale(1.2);
-	color: black;
-
-}
-
-input[type="email"]:focus {
-
-	background: white;
-	transform: scale(1.2);
-	color: black;
-
-}
-
-select:focus {
-	transform: scale(1.1);
-	background: white;
-	color: black;
-}
-
-textarea:focus {
-	transform: scale(1.1);
-	background-color: white;
-	color: black;
-	border: 2px solid black;
-	opacity: 0.5;
-}
 
 
 fieldset {
@@ -174,7 +203,7 @@ input:checked + label {
 
 input[type="button"] {
 
-	background-color: rgba(63, 202, 63, 0.767);
+	background-color: rgba(134, 240, 134, 0.767);
 	width: 100%;
 	border-radius: 6px;
 	font-size: 30px;
@@ -185,8 +214,8 @@ input[type="button"] {
 
 input[type="button"]:hover {
 
-	background-color: whitesmoke;
-	color: forestgreen;
+	background-color: rgb(195, 240, 186);
+	color: rgb(88, 90, 88);
 	transform: scale(1.1);
 }
 
@@ -246,24 +275,6 @@ input[type="button"]:hover {
   
   
 
-  /*********** alerts styles************************/
-  /*********** alerts styles************************/
-
-
-  .bm-alert{
-    position: relative;
-    color: rgb(29, 28, 28);
-    padding: 10px;
-    border-radius: 6px;
-    line-height: 1.5;
-    opacity: 1;
-    transition: opacity 0.6s;
-  
-}
-.bm-alert p{
-
-	margin: auto
-  }
 
 
 /******media queries*****/
@@ -274,14 +285,7 @@ input[type="button"]:hover {
 		flex-direction: row;
 	}
 
-	input[type="text"],
-	input[type="email"],
-	input[type="number"],
-	input[type="tel"],
-	input[type="field"],
-	input[type="url"],
-	textarea,
-	select {
+	.bm-control {
 		flex-grow: 1;
 		flex-basis: 75%;
 	}
@@ -303,4 +307,11 @@ input[type="button"]:hover {
 		width: 70%;
 		margin: 0 auto;
 	}
+
+	.liveValidateMessage {
+		top: -30px !important;
+		right: 0;
+		width: 75% !important;
+		
+	  }
 }

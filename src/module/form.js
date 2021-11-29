@@ -1,28 +1,65 @@
 
 import Modal from './modal.js';
-export default class SubmitClientForm{
+export default class Form{
 
 constructor() {
   this.form = document.querySelector("#contact");
-  this.allFields = document.querySelectorAll("#contact .bm-input");
+  this.allFields = document.querySelectorAll("#contact .bm-control");
   this.insertValidationElements() 
-  this.subject =  document.querySelector("#subject")
-  this.subject.previousValue = ""
+
+  this.name =  document.querySelector("#name")
+  this.name.previousValue = ""
+
   this.email = document.querySelector("#email")
   this.email.previousValue = ""
-  this.text = document.querySelector("#text")
-  this.text.previousValue = ""
+
+  this.phone = document.querySelector("#phone")
+  this.phone.previousValue = ""
+
+  this.comment = document.querySelector("#comment")
+  this.comment.previousValue = ""
+
+  this.city = document.querySelector("#city")
+  this.city.previousValue = ""
+
+  this.state = document.querySelector("#i-state")
+  this.state.previousValue = ""
+
+  this.address = document.querySelector("#address")
+  this.address.previousValue = ""
+
+  this.zip = document.querySelector("#zip")
+  this.zip.previousValue = ""
+
   this.modal =  new Modal;
   this.events()
   
 }
 
 // events
+
 events() {
+
     this.form.addEventListener("submit",  e => {
      e.preventDefault();
        this.formSubmitHandler()
     })
+
+    this.name.addEventListener("keyup", () => {
+        this.isDifferent(this.name, this.nameHandler)
+      })
+  
+      this.name.addEventListener("blur", () => {
+        this.isDifferent(this.name, this.nameHandler)
+      })
+
+      this.phone.addEventListener("keyup", () => {
+        this.isDifferent(this.phone, this.phoneHandler)
+      })
+  
+      this.phone.addEventListener("blur", () => {
+        this.isDifferent(this.phone, this.phoneHandler)
+      })
 
 
     this.email.addEventListener("keyup", () => {
@@ -32,23 +69,33 @@ events() {
     this.email.addEventListener("blur", () => {
       this.isDifferent(this.email, this.emailHandler)
     })
+    
+    this.phone.addEventListener("keyup", () => {
+        this.isDifferent(this.phone, this.phoneHandler)
+      })
+  
+      this.phone.addEventListener("blur", () => {
+        this.isDifferent(this.phone, this.phoneHandler)
+      })
 
-    this.text.addEventListener("keyup", () => {
-      this.isDifferent(this.text, this.textHandler)
+      
+    this.address.addEventListener("keyup", () => {
+        this.isDifferent(this.address, this.addressHandler)
+      })
+  
+      this.address.addEventListener("blur", () => {
+        this.isDifferent(this.address, this.addressHandler)
+      })
+
+    this.comment.addEventListener("keyup", () => {
+      this.isDifferent(this.comment, this.commentHandler)
     })
 
-    this.text.addEventListener("blur", () => {
-      this.isDifferent(this.text, this.textHandler)
+    this.comment.addEventListener("blur", () => {
+      this.isDifferent(this.comment, this.commentHandler)
     })
 
 
-    this.subject.addEventListener("keyup", () => {
-      this.isDifferent(this.subject, this.subjectHandler)
-    })
-
-    this.subject.addEventListener("blur", () => {
-      this.isDifferent(this.subject, this.subjectHandler)
-    })
 
 }
 
@@ -62,11 +109,13 @@ isDifferent(el, handler) {
 
 
 formSubmitHandler() {
+this.name
+thi    
 this.emailAfterDelay()
-this.textImmediately()
-this.textAfterDelay()
-this.subjectImmediately()
-this.subjectAfterDelay()
+this.commentImmediately()
+this.commentAfterDelay()
+this.phoneImmediately()
+this.phoneAfterDelay()
 
 if(!this.subject.errors && !this.email.errors && !this.text.errors) {
   this.submitHandler()
@@ -102,6 +151,44 @@ axios.post('/contact', data)
       })
       this.modal.close();
 }
+//name section
+
+nameHandler() {
+    this.name.errors = false
+    this.nameImmediately()
+    clearTimeout(this.name.timer)
+    this.name.timer = setTimeout(() => this.nameAfterDelay(), 800)
+  }
+  
+  nameImmediately() {
+   
+    if(this.name.value !== '' && this.name.value.length < 5){
+     this.showValidationError(this.name, `Please provide a longer name.`);
+    }
+  
+    if (this.name.value.length > 50) {
+      this.showValidationError(this.name, "Your name cannot exceed 50 characters.")
+    }
+  
+    if (!this.name.errors) {
+      this.hideValidationError(this.name)
+    }
+  }
+
+  nameAfterDelay() {
+  
+    if (this.name.value > 30 && this.name.value.length >= 1) {
+      this.showValidationError(this.name, "Name is too short.")
+    }
+  
+    if (!this.name.errors) {
+      this.hideValidationError(this.name)
+    }
+  
+  }
+  
+  
+    
 
 
 // email section
@@ -115,7 +202,7 @@ emailHandler() {
 emailAfterDelay() {
 
   if (!/^\S+@\S+$/.test(this.email.value)) {
-    this.showValidationError(this.email, "You must provide a valid email address.")
+    this.showValidationError(this.email, "Please provide a valid email address.")
   }
 
   if (!this.email.value) {
@@ -129,67 +216,119 @@ emailAfterDelay() {
 
  
 }
-// email section
+
+
+// phone section
+
+phoneHandler() {
+    this.phone.errors = false
+    this.phoneImmediately()
+    clearTimeout(this.phone.timer)
+    this.phone.timer = setTimeout(() => this.phoneAfterDelay(), 800)
+  }
+  
+  phoneImmediately() {
+    if(!/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(this.phone.value)){
+     this.showValidationError(this.phone, "Please enter a valid phone number.")
+    }
+  
+    if (!this.phone.errors) {
+      this.hideValidationError(this.phone)
+    }
+  }
+  
+  phoneAfterDelay() {
+  
+    if (this.phone.value.length > 50) {
+      this.showValidationError(this.phone, "Your message cannot exceed 50 characters.")
+    }
+  
+    if(this.phone.value.length === 0){
+        this.hideValidationError(this.phone)
+    }
+  
+    if (!this.phone.errors) {
+      this.hideValidationError(this.phone)
+    }
+  
+  }
+
+  // address section
+
+addressHandler() {
+    this.address.errors = false
+    this.addressImmediately()
+    clearTimeout(this.address.timer)
+    this.address.timer = setTimeout(() => this.addressAfterDelay(), 800)
+  }
+  
+  addressImmediately() {
+    if(this.address.value.length < 4){
+     this.showValidationError(this.address, `Please enter a valid address`)
+    }
+  
+    if (!this.address.errors) {
+      this.hideValidationError(this.address)
+    }
+  }
+  
+  addressAfterDelay() {
+  
+    if (this.address.value.length > 30) {
+      this.showValidationError(this.address, "Your address cannot exceed 30 characters.")
+    }
+  
+   
+  
+    if (!this.address.errors) {
+      this.hideValidationError(this.address)
+    }
+  
+  }
 
 
 
-// text section
+// comment section
 
-textHandler() {
-  this.text.errors = false
-  this.textImmediately()
-  clearTimeout(this.text.timer)
-  this.text.timer = setTimeout(() => this.textAfterDelay(), 800)
+commentHandler() {
+  this.comment.errors = false
+  this.commentImmediately()
+  clearTimeout(this.comment.timer)
+  this.comment.timer = setTimeout(() => this.commentAfterDelay(), 800)
 }
 
-textImmediately() {
+commentImmediately() {
  
-  if(this.text.value !== '' && this.text.value.length < 150){
-   this.showValidationError(this.text, `You should provide more information.`);
+  if(this.comment.value !== '' && this.comment.value.length < 150){
+   this.showValidationError(this.comment, `Please write at least 150 characters.`);
   }
 
-  if (this.text.value.length > 1000) {
-    this.showValidationError(this.text, "Your message cannot exceed 500 characters.")
+  if (this.comment.value.length > 1000) {
+    this.showValidationError(this.comment, "Your comment can not exceed 500 characters.")
   }
 
-  if (!this.text.errors) {
-    this.hideValidationError(this.text)
-  }
-}
-
-// text section 
-
-
-// subject section
-
-subjectHandler() {
-  this.subject.errors = false
-  this.subjectImmediately()
-  clearTimeout(this.subject.timer)
-  this.text.timer = setTimeout(() => this.subjectAfterDelay(), 800)
-}
-
-subjectImmediately() {
-  if(this.subject.value !== '' && this.subject.value.length < 10){
-   this.showValidationError(this.subject, "You should provide a longer title.")
-  }
-
-  if (!this.subject.errors) {
-    this.hideValidationError(this.subject)
+  if (!this.comment.errors) {
+    this.hideValidationError(this.comment)
   }
 }
 
-subjectAfterDelay() {
+commentAfterDelay() {
 
-  if (this.subject.value.length > 50) {
-    this.showValidationError(this.subject, "Your message cannot exceed 50 characters.")
+    if (this.comment.value < 50 && this.comment.value.length >= 1) {
+      this.showValidationError(this.comment, "Your comment is too short.")
+    }
+  
+    if (!this.comment.errors) {
+      this.hideValidationError(this.comment)
+    }
+  
   }
+  
 
-  if (!this.subject.errors) {
-    this.hideValidationError(this.subject)
-  }
 
-}
+
+
+
 
 
 hideValidationError(el) {
@@ -197,31 +336,17 @@ hideValidationError(el) {
   }  
 
 showValidationError(el, msg) {
-  el.nextElementSibling.innerHTML =`<p class="uk-text-small">${msg}</p>`;
+  el.nextElementSibling.innerHTML =`<p>${msg}</p>`;
   el.nextElementSibling.classList.add("liveValidateMessage--visible");
   el.errors = true;
 }
-
-
-textAfterDelay() {
-
-  if (this.text.value < 50 && this.text.value.length >= 1) {
-    this.showValidationError(this.text, "Your message is too short.")
-  }
-
-  if (!this.text.errors) {
-    this.hideValidationError(this.text)
-  }
-
-}
-
 
 insertValidationElements() {
 
   this.allFields.forEach((el)=> {
     el.insertAdjacentHTML('afterend',
                      `
-                         <div class="uk-alert uk-border-rounded uk-alert-danger liveValidateMessage bm-small">
+                         <div class="bm-alert bm-danger liveValidateMessage bm-small">
                              
                          </div>
 

@@ -1,2 +1,8 @@
-import Modal from "./module/modal";
-import form from "./module/form";
+import Form from "./module/form";
+
+
+window.onload = function(){
+
+    new Form();
+
+}
