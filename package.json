@@ -9,8 +9,8 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel src/index.html --dist-dir dist ",
-    "build": "parcel build src/index.html --dist-dir  dist --public-url ./",
-    "deploy": "npm run build && git add . && git commit -m 'latest build' &&  git push -u origin master"
+    "build": "parcel build src/index.html --dist-dir  docs --public-url ./",
+    "deploy": "npm run build && git add . && git commit -a -m 'latest build' &&  git push -u origin master"
   },
   "repository": {
     "type": "git",
