@@ -8,9 +8,9 @@
   },
   "source": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel --open",
-    "build": "parcel build src/index.html"
+    "start": "parcel src/index.html --dist-dir dist ",
+    "build": "parcel build src/index.html --dist-dir  dist --public-url ./",
+    "deploy": "npm run build && git add . && git commit -m 'latest build' &&  git push -u origin master"
   },
   "repository": {
     "type": "git",

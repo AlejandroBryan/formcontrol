@@ -287,6 +287,39 @@ addressHandler() {
   }
 
 
+    // zip section
+
+zipHandler() {
+    this.zip.errors = false
+    this.zipImmediately()
+    clearTimeout(this.zip.timer)
+    this.zip.timer = setTimeout(() => this.zipAfterDelay(), 800)
+  }
+  
+  zipImmediately() {
+    if(this.zip.value.length < 4 && isNaN(this.zip.value)){
+     this.showValidationError(this.zip, `Please enter a valid zip code`)
+    }
+  
+    if (!this.zip.errors) {
+      this.hideValidationError(this.zip)
+    }
+  }
+  
+  zipAfterDelay() {
+  
+    if (this.zip.value.length > 6) {
+      this.showValidationError(this.zip, "Your address cannot exceed 30 characters.")
+    }
+  
+   
+  
+    if (!this.zip.errors) {
+      this.hideValidationError(this.zip)
+    }
+  
+  }
+
 
 // comment section
 
